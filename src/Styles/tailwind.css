@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0f1e;
+  --foreground: #f1f5f9;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #1f2937;
+  --secondary-foreground: #e2e8f0;
+  --accent: #10b981;
+  --accent-foreground: #ffffff;
+  --muted: #1f2937;
+  --muted-foreground: #6b7280;
+  --card: #111827;
+  --card-foreground: #f1f5f9;
+  --border: #1f2937;
+  --input: #1f2937;
+  --ring: #3b82f6;
+  --radius: 0.75rem;
+  --font-sans: var(--font-geist-sans), 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --warning: #f59e0b;
+  --warning-foreground: #ffffff;
+  --danger: #ef4444;
+  --danger-foreground: #ffffff;
+  --surface: #1f2937;
+  --surface-elevated: #263347;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .font-mono-nums {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .text-hero-xl {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--surface);
+    border-radius: 2px;
+  }
+
+  .glass-card {
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(31, 41, 55, 0.8);
+  }
+
+  .gradient-border {
+    position: relative;
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      linear-gradient(135deg, var(--primary), var(--accent)) border-box;
+    border: 1px solid transparent;
+  }
+
+  .pulse-dot {
+    animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .slide-up {
+    animation: slideUp 0.25s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .number-highlight {
+    animation: numHighlight 0.6s ease-out;
+  }
+
+  @keyframes numHighlight {
+    0% {
+      background-color: rgba(59, 130, 246, 0.3);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, var(--muted) 25%, var(--surface) 50%, var(--muted) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .sidebar-transition {
+    transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .content-transition {
+    transition: margin-left 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium text-sm
+    hover:bg-blue-600 active:scale-95 transition-all duration-150 disabled:opacity-50
+    disabled:cursor-not-allowed flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-surface text-foreground px-4 py-2 rounded-lg font-medium text-sm
+    border border-border hover:bg-surface-elevated active:scale-95 transition-all
+    duration-150 disabled:opacity-50 flex items-center gap-2;
+  }
+
+  .btn-danger {
+    @apply bg-danger text-danger-foreground px-4 py-2 rounded-lg font-medium text-sm
+    hover:bg-red-600 active:scale-95 transition-all duration-150 disabled:opacity-50 flex items-center gap-2;
+  }
+
+  .btn-success {
+    @apply bg-accent text-accent-foreground px-4 py-2 rounded-lg font-medium text-sm
+    hover:bg-emerald-600 active:scale-95 transition-all duration-150 disabled:opacity-50 flex items-center gap-2;
+  }
+
+  .input-field {
+    @apply w-full bg-input border border-border rounded-lg px-3 py-2.5 text-sm text-foreground
+    placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring
+    focus:border-primary transition-colors duration-150;
+  }
+
+  .card-base {
+    @apply bg-card border border-border rounded-xl;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .table-header {
+    @apply text-xs font-medium text-muted-foreground uppercase tracking-wider px-4 py-3;
+  }
+
+  .table-cell {
+    @apply px-4 py-3.5 text-sm text-foreground;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+    text-muted-foreground hover:text-foreground hover:bg-surface transition-all duration-150;
+  }
+  .nav-item-active {
+    @apply text-primary border;
+  }
+
+  .section-header {
+    @apply text-lg font-semibold text-foreground;
+  }
+
+  .label-text {
+    @apply text-xs font-medium text-muted-foreground uppercase tracking-wide;
+  }
+
+  .metric-value {
+    @apply text-3xl font-bold text-foreground font-mono-nums;
+  }
+}
